@@ -161,5 +161,6 @@
     <orderEntry type="library" exported="" name="play-services-measurement-8.4.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-cast-8.4.0" level="project" />
     <orderEntry type="module" module-name="libjoke" exported="" />
+    <orderEntry type="module" module-name="libjokeactivity" exported="" />
   </component>
 </module>
