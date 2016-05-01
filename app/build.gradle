@@ -15,7 +15,8 @@ android {
     }
     dexOptions {
         incremental true
-        javaMaxHeapSize "4g"
+        maxProcessCount 4
+        javaMaxHeapSize "2g"
     }
     buildTypes {
         release {
@@ -31,6 +32,7 @@ dependencies {
     compile project(':libjoke')
     compile project(':libjokeactivity')
     compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:design:23.3.0'
     compile 'com.google.android.gms:play-services:8.4.0'
     compile 'com.google.android.gms:play-services-ads:8.4.0'
     compile 'com.google.android.gms:play-services-identity:8.4.0'
