@@ -4,6 +4,7 @@ package com.udacity.gradle.builditbigger;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,8 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
     private Button mButtonJoke;
     InterstitialAd mInterstitialAd;
     private ProgressBar mProgressBar;
+
+    private static final String TAG = "MainActivityFragment";
 
     public MainActivityFragment() {
     }
@@ -102,6 +105,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
         @Override
         protected void onPostExecute(String result) {
             mProgressBar.setVisibility(View.GONE);
+            Log.d(TAG, "onPostExecute: " + result);
             strJoke = result;
         }
     }

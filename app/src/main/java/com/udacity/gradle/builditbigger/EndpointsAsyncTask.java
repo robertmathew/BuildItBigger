@@ -21,7 +21,6 @@ public class EndpointsAsyncTask extends AsyncTask<String, Void, String> {
         if (myApiService == null) {  // Only do this once
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
                     .setRootUrl("https://shaped-manifest-129823.appspot.com/_ah/api/");
-            // end options for devappserver
 
             myApiService = builder.build();
         }
@@ -30,7 +29,7 @@ public class EndpointsAsyncTask extends AsyncTask<String, Void, String> {
         //String name = params[0].second;
 
         try {
-            return myApiService.sayHi("Robert Mathew").execute().getData();
+            return myApiService.getJoke().execute().getData();
         } catch (IOException e) {
             return e.getMessage();
         }
