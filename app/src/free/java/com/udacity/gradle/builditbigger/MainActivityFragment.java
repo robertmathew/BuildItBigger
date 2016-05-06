@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -24,6 +26,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
     private String strJoke;
     private Button mButtonJoke;
     InterstitialAd mInterstitialAd;
+    private ProgressBar mProgressBar;
 
     public MainActivityFragment() {
     }
@@ -41,6 +44,9 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .build();
         mAdView.loadAd(adRequest);
+
+        mProgressBar = (ProgressBar) root.findViewById(R.id.progressBar);
+        mProgressBar.setVisibility(View.GONE);
 
         mInterstitialAd = new InterstitialAd(getActivity());
         mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
@@ -85,8 +91,17 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
     }
 
     private class GetGcmJoke extends EndpointsAsyncTask {
+
+        @Override
+        protected void onPreExecute() {
+            mProgressBar.setVisibility(View.VISIBLE);
+            Toast.makeText(getActivity(), "Loading joke..", Toast.LENGTH_SHORT).show();
+            super.onPreExecute();
+        }
+
         @Override
         protected void onPostExecute(String result) {
+            mProgressBar.setVisibility(View.GONE);
             strJoke = result;
         }
     }

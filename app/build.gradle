@@ -32,6 +32,7 @@ android {
         }
         free {
             java.srcDirs = ['src/free/java']
+            res.srcDirs = ['src/free/res']
         }
         main {
             java.srcDirs = ['src/main/java']

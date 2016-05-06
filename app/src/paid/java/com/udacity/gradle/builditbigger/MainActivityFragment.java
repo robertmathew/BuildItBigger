@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.robo.libjokeactivity.JokeActivity;
 
@@ -19,6 +21,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
 
     private String strJoke;
     private Button mButtonJoke;
+    private ProgressBar mProgressBar;
 
     public MainActivityFragment() {
     }
@@ -30,6 +33,9 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
 
         mButtonJoke = (Button) root.findViewById(R.id.btnJoke);
         mButtonJoke.setOnClickListener(this);
+
+        mProgressBar = (ProgressBar) root.findViewById(R.id.progressBar);
+        mProgressBar.setVisibility(View.GONE);
 
         new GetGcmJoke().execute();
 
@@ -45,8 +51,17 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
     }
 
     private class GetGcmJoke extends EndpointsAsyncTask {
+
+        @Override
+        protected void onPreExecute() {
+            mProgressBar.setVisibility(View.VISIBLE);
+            Toast.makeText(getActivity(), "Loading joke..", Toast.LENGTH_SHORT).show();
+            super.onPreExecute();
+        }
+
         @Override
         protected void onPostExecute(String result) {
+            mProgressBar.setVisibility(View.GONE);
             strJoke = result;
         }
     }
